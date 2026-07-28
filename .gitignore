@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Django
+backend/.env
+backend/media/
+backend/staticfiles/
+
+# JavaScript
+frontend/node_modules/
+frontend/dist/
+
+# Editors and local files
+.DS_Store
+.vscode/
