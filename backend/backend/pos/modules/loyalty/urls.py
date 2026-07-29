@@ -2,13 +2,12 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from pos.modules.loyalty.views import (
     LoyaltyProgramView, MembershipTierViewSet, LoyaltyTransactionViewSet,
-    GiftCardViewSet, CouponViewSet, PromotionViewSet,
+    CouponViewSet, PromotionViewSet,
 )
 
 router = DefaultRouter()
 router.register(r"loyalty/tiers",        MembershipTierViewSet,     basename="loyalty-tiers")
 router.register(r"loyalty/transactions", LoyaltyTransactionViewSet, basename="loyalty-transactions")
-router.register(r"loyalty/gift-cards",   GiftCardViewSet,           basename="loyalty-gift-cards")
 router.register(r"loyalty/coupons",      CouponViewSet,             basename="loyalty-coupons")
 router.register(r"loyalty/promotions",   PromotionViewSet,          basename="loyalty-promotions")
 

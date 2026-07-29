@@ -45,6 +45,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'pos',
     'rest_framework',
+    'pos.modules.saas',
+    'rest_framework.authtoken',
+    'drf_spectacular',
+    'pos.modules.catalog.apps.CatalogConfig',
+    'pos.modules.pricing.apps.PricingConfig',
+    'pos.modules.inventory2.apps.Inventory2Config',
+    'pos.modules.pos2.apps.Pos2Config',
+    'pos.modules.customers2.apps.Customers2Config',
+    'pos.modules.payments2.apps.Payments2Config',
+    'pos.modules.suppliers2.apps.Suppliers2Config',
+    'pos.modules.transfers2.apps.Transfers2Config',
+
 ]
 
 MIDDLEWARE = [
@@ -54,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'pos.modules.saas.middleware.TenantMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -137,13 +150,17 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "pos.authentication.ExpiringTokenAuthentication",
+    "DEFAULT_AUTHENTICATION_CLASSES": ["pos.authentication.ExpiringTokenAuthentication"],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.AnonRateThrottle",
     ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ],
+    "DEFAULT_THROTTLE_RATES": {"user": "120/min", "anon": "30/min"},
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+SPECTACULAR_SETTINGS = {"TITLE": "POS Enterprise API", "DESCRIPTION": "SaaS POS REST API", "VERSION": "1.0.0"}
 
 # Production cookie and browser security. HTTPS is normally terminated at the
 # reverse proxy, so these settings only activate when DEBUG is disabled.
@@ -154,3 +171,7 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = int(os.environ.get("DJANGO_HSTS_SECONDS", "31536000"))
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")    

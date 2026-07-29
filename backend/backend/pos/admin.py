@@ -97,12 +97,11 @@ admin.site.register(PayrollEntry)
 # ── Phase 3: Loyalty ─────────────────────────────────────────────────────────
 from pos.modules.loyalty.models import (
     LoyaltyProgram, MembershipTier, LoyaltyTransaction,
-    GiftCard, Coupon, Promotion
+    Coupon, Promotion
 )
 admin.site.register(LoyaltyProgram)
 admin.site.register(MembershipTier)
 admin.site.register(LoyaltyTransaction)
-admin.site.register(GiftCard)
 admin.site.register(Coupon)
 admin.site.register(Promotion)
 

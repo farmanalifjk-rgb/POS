@@ -1,0 +1,1 @@
+default_app_config = "pos.modules.transfers2.apps.Transfers2Config"

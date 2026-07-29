@@ -73,23 +73,6 @@ def generate_gift_card_code():
     return secrets.token_hex(8).upper()
 
 
-class GiftCard(models.Model):
-    STATUS_ACTIVE  = "active"
-    STATUS_USED    = "used"
-    STATUS_EXPIRED = "expired"
-    STATUS_CHOICES = [("active","Active"),("used","Used"),("expired","Expired")]
-
-    code       = models.CharField(max_length=20, unique=True, default=generate_gift_card_code)
-    balance    = models.DecimalField(max_digits=12, decimal_places=2)
-    issued_to  = models.ForeignKey("pos.Customer", null=True, blank=True, on_delete=models.SET_NULL, related_name="gift_cards")
-    expiry     = models.DateField(null=True, blank=True)
-    status     = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_ACTIVE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"GC-{self.code} (Rs. {self.balance})"
-
-
 class Coupon(models.Model):
     TYPE_PERCENT = "percent"
     TYPE_FIXED   = "fixed"

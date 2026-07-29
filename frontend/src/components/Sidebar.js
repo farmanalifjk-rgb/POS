@@ -54,6 +54,94 @@ const icons = {
 };
 
 const navSections = [
+
+  //-------------- Saas Subscriptions
+  {
+  id: "saas",
+  label: "SaaS Admin",
+  icon: `<i data-lucide="credit-card" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { 
+      id: "saas-subscription", 
+      label: "Subscription & Billing", 
+      route: "#/subscription", 
+      icon: "credit-card" 
+    },
+    { 
+      id: "saas-tenants", 
+      label: "Tenants", 
+      route: "#/tenants", 
+      icon: "building-2" 
+    },
+  ],
+},
+{
+  id: "pos2",
+  label: "Advanced POS",
+  icon: `<i data-lucide="monitor-smartphone" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "p2-park", label: "Parked Orders", route: "#/parked-orders", icon: "pause-circle" },
+    { id: "p2-receipt", label: "Receipt Designer", route: "#/receipt-designer", icon: "printer" },
+  ],
+},
+{
+  id: "inventory2",
+  label: "Inventory+",
+  icon: `<i data-lucide="boxes" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "i2-cycle", label: "Cycle Count", route: "#/cycle-count", icon: "clipboard-check" },
+    { id: "i2-abc", label: "ABC Analysis", route: "#/abc-analysis", icon: "chart-pie" },
+    { id: "i2-aging", label: "Inventory Aging", route: "#/inventory-aging", icon: "hourglass" },
+    { id: "i2-reorder", label: "Reorder Alerts", route: "#/reorder-alerts", icon: "bell-ring" },
+  ],
+},
+{
+  id: "payments2",
+  label: "Payments+",
+  icon: `<i data-lucide="wallet" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "pay2-giftcards", label: "Gift Cards", route: "#/gift-cards", icon: "credit-card" },
+    { id: "pay2-recon", label: "Reconciliation", route: "#/reconciliation", icon: "scale" },
+  ],
+},
+{
+  id: "customers2",
+  label: "Customers+",
+  icon: `<i data-lucide="users-round" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "cust2-360", label: "Customer 360°", route: "#/customer-360", icon: "user-round-search" },
+    { id: "cust2-credit", label: "Credit Limits", route: "#/credit-limits", icon: "badge-dollar-sign" },
+  ],
+},
+{
+  id: "suppliers2",
+  label: "Suppliers+",
+  icon: `<i data-lucide="truck" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "sup2-receipts", label: "Goods Receipt", route: "#/goods-receipt", icon: "package-check" },
+    { id: "sup2-returns", label: "Purchase Returns", route: "#/purchase-returns", icon: "package-x" },
+  ],
+},
+{
+  id: "transfers2",
+  label: "Warehouse+",
+  icon: `<i data-lucide="warehouse" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "tr2-transfers", label: "Stock Transfers", route: "#/stock-transfers", icon: "arrow-left-right" },
+    { id: "tr2-putaway", label: "Put-Away", route: "#/put-away", icon: "package-open" },
+    { id: "tr2-replen", label: "Replenishment", route: "#/replenishment", icon: "refresh-cw" },
+  ],
+},
+{
+  id: "catalog",
+  label: "Catalog",
+  icon: `<i data-lucide="layers" width="18" height="18" stroke-width="1.8"></i>`,
+  items: [
+    { id: "cat-bundles", label: "Bundles & Combos", route: "#/bundles", icon: "package" },
+    { id: "cat-serials", label: "Serials & Batches", route: "#/serials-batches", icon: "scan-line" },
+    { id: "cat-pricelists", label: "Price Lists", route: "#/price-lists", icon: "tag" },
+  ],
+},
   // ── Orders & Transactions ──────────────────────────────────────────────────
   {
     id: "orders",

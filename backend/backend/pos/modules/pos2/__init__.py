@@ -1,0 +1,1 @@
+default_app_config = "pos.modules.pos2.apps.Pos2Config"

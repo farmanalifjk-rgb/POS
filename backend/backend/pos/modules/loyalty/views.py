@@ -17,7 +17,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from pos.modules.loyalty.models import (
-    Coupon, GiftCard, LoyaltyProgram, LoyaltyTransaction,
+    Coupon, LoyaltyProgram, LoyaltyTransaction,
     MembershipTier, Promotion,
 )
 
@@ -42,14 +42,6 @@ class LoyaltyTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model  = LoyaltyTransaction
         fields = ["id","customer","customer_name","type","points","reference","reason","created_at"]
-
-
-class GiftCardSerializer(serializers.ModelSerializer):
-    issued_to_name = serializers.CharField(source="issued_to.name", read_only=True)
-
-    class Meta:
-        model  = GiftCard
-        fields = ["id","code","balance","issued_to","issued_to_name","expiry","status","created_at"]
 
 
 class CouponSerializer(serializers.ModelSerializer):
@@ -115,29 +107,6 @@ class LoyaltyTransactionViewSet(viewsets.ModelViewSet):
             customer.loyalty_points = (customer.loyalty_points or 0) + tx.points
             customer.save(update_fields=["loyalty_points"])
 
-
-class GiftCardViewSet(viewsets.ModelViewSet):
-    queryset = GiftCard.objects.select_related("issued_to").all()
-    serializer_class = GiftCardSerializer
-    permission_classes = [IsAuthenticated]
-
-    @action(detail=True, methods=["post"])
-    def redeem(self, request, pk=None):
-        card   = self.get_object()
-        amount = float(request.data.get("amount", 0))
-        if card.status != GiftCard.STATUS_ACTIVE:
-            return Response({"error": "Gift card is not active."}, status=400)
-        if card.expiry and card.expiry < timezone.now().date():
-            card.status = GiftCard.STATUS_EXPIRED
-            card.save()
-            return Response({"error": "Gift card has expired."}, status=400)
-        if amount > float(card.balance):
-            return Response({"error": "Insufficient gift card balance."}, status=400)
-        card.balance = float(card.balance) - amount
-        if card.balance <= 0:
-            card.status = GiftCard.STATUS_USED
-        card.save()
-        return Response(GiftCardSerializer(card).data)
 
 
 class CouponViewSet(viewsets.ModelViewSet):
