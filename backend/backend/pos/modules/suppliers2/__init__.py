@@ -1,1 +1,0 @@
-default_app_config = "pos.modules.suppliers2.apps.Suppliers2Config"

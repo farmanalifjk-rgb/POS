@@ -1,5 +1,5 @@
 import { createIcons, icons as lucideIcons } from "lucide";
-import {showTooltip,hideTooltip} from "./Tooltip";
+import { showTooltip, hideTooltip } from "./Tooltip";
 
 let company = null;
 
@@ -54,283 +54,232 @@ const icons = {
 };
 
 const navSections = [
-
-  //-------------- Saas Subscriptions
+  // ── SaaS Subscriptions ──────────────────────────────────────────────────
   {
-  id: "saas",
-  label: "SaaS Admin",
-  icon: `<i data-lucide="credit-card" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { 
-      id: "saas-subscription", 
-      label: "Subscription & Billing", 
-      route: "#/subscription", 
-      icon: "credit-card" 
-    },
-    { 
-      id: "saas-tenants", 
-      label: "Tenants", 
-      route: "#/tenants", 
-      icon: "building-2" 
-    },
-  ],
-},
-{
-  id: "pos2",
-  label: "Advanced POS",
-  icon: `<i data-lucide="monitor-smartphone" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "p2-park", label: "Parked Orders", route: "#/parked-orders", icon: "pause-circle" },
-    { id: "p2-receipt", label: "Receipt Designer", route: "#/receipt-designer", icon: "printer" },
-  ],
-},
-{
-  id: "inventory2",
-  label: "Inventory+",
-  icon: `<i data-lucide="boxes" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "i2-cycle", label: "Cycle Count", route: "#/cycle-count", icon: "clipboard-check" },
-    { id: "i2-abc", label: "ABC Analysis", route: "#/abc-analysis", icon: "chart-pie" },
-    { id: "i2-aging", label: "Inventory Aging", route: "#/inventory-aging", icon: "hourglass" },
-    { id: "i2-reorder", label: "Reorder Alerts", route: "#/reorder-alerts", icon: "bell-ring" },
-  ],
-},
-{
-  id: "payments2",
-  label: "Payments+",
-  icon: `<i data-lucide="wallet" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "pay2-giftcards", label: "Gift Cards", route: "#/gift-cards", icon: "credit-card" },
-    { id: "pay2-recon", label: "Reconciliation", route: "#/reconciliation", icon: "scale" },
-  ],
-},
-{
-  id: "customers2",
-  label: "Customers+",
-  icon: `<i data-lucide="users-round" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "cust2-360", label: "Customer 360°", route: "#/customer-360", icon: "user-round-search" },
-    { id: "cust2-credit", label: "Credit Limits", route: "#/credit-limits", icon: "badge-dollar-sign" },
-  ],
-},
-{
-  id: "suppliers2",
-  label: "Suppliers+",
-  icon: `<i data-lucide="truck" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "sup2-receipts", label: "Goods Receipt", route: "#/goods-receipt", icon: "package-check" },
-    { id: "sup2-returns", label: "Purchase Returns", route: "#/purchase-returns", icon: "package-x" },
-  ],
-},
-{
-  id: "transfers2",
-  label: "Warehouse+",
-  icon: `<i data-lucide="warehouse" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "tr2-transfers", label: "Stock Transfers", route: "#/stock-transfers", icon: "arrow-left-right" },
-    { id: "tr2-putaway", label: "Put-Away", route: "#/put-away", icon: "package-open" },
-    { id: "tr2-replen", label: "Replenishment", route: "#/replenishment", icon: "refresh-cw" },
-  ],
-},
-{
-  id: "catalog",
-  label: "Catalog",
-  icon: `<i data-lucide="layers" width="18" height="18" stroke-width="1.8"></i>`,
-  items: [
-    { id: "cat-bundles", label: "Bundles & Combos", route: "#/bundles", icon: "package" },
-    { id: "cat-serials", label: "Serials & Batches", route: "#/serials-batches", icon: "scan-line" },
-    { id: "cat-pricelists", label: "Price Lists", route: "#/price-lists", icon: "tag" },
-  ],
-},
-  // ── Orders & Transactions ──────────────────────────────────────────────────
+    id: "saas",
+    label: "SaaS Admin",
+    icon: `<i data-lucide="credit-card" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "saas-subscription", label: "Subscription & Billing", route: "#/subscription", icon: "credit-card" },
+      { id: "saas-tenants", label: "Tenants", route: "#/tenants", icon: "building-2" },
+    ],
+  },
+  // ── Point of Sale ────────────────────────────────────────────────────────
+  {
+    id: "pos2",
+    label: "Advanced POS",
+    icon: `<i data-lucide="monitor-smartphone" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "p2-park", label: "Parked Orders", route: "#/parked-orders", icon: "pause-circle" },
+      { id: "p2-receipt", label: "Receipt Designer", route: "#/receipt-designer", icon: "printer" },
+    ],
+  },
+  // ── Orders & Transactions ────────────────────────────────────────────────
   {
     id: "orders",
     label: "Orders",
     icon: icons.cart,
     items: [
-      { id: "orders-all",       label: "All Orders",      route: "#/orders?filter=all",           icon: "list" },
-      { id: "orders-completed", label: "Completed",       route: "#/orders?filter=completed",     icon: "badge-check" },
-      { id: "orders-refunds",   label: "Refund History",  route: "#/orders?filter=refunds",              icon: "undo-2" },
-      { id: "orders-partial",   label: "Partial Refunds", route: "#/orders?filter=partial-refunds",icon: "undo-2" },
-      { id: "orders-draft",     label: "Drafts",          route: "#/orders?filter=draft",         icon: "file-text" },
-      { id: "cash-sessions",    label: "Cash Sessions",   route: "#/cash-sessions",               icon: "landmark" },
+      { id: "orders-all", label: "All Orders", route: "#/orders?filter=all", icon: "list" },
+      { id: "orders-completed", label: "Completed", route: "#/orders?filter=completed", icon: "badge-check" },
+      { id: "orders-refunds", label: "Refund History", route: "#/orders?filter=refunds", icon: "undo-2" },
+      { id: "orders-partial", label: "Partial Refunds", route: "#/orders?filter=partial-refunds", icon: "undo-2" },
+      { id: "orders-draft", label: "Drafts", route: "#/orders?filter=draft", icon: "file-text" },
+      { id: "cash-sessions", label: "Cash Sessions", route: "#/cash-sessions", icon: "landmark" },
     ],
   },
-
-  // ── Inventory ──────────────────────────────────────────────────────────────
+  // ── Catalog & Products ───────────────────────────────────────────────────
+  {
+    id: "catalog",
+    label: "Catalog",
+    icon: `<i data-lucide="layers" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "products-all", label: "All Products", route: "#/products", icon: "package" },
+      { id: "products-categories", label: "Categories", route: "#/categories", icon: "folder" },
+      { id: "products-brands", label: "Brands", route: "#/brands", icon: "tag" },
+      { id: "products-variants", label: "Variants", route: "#/variants", icon: "layers" },
+      { id: "cat-bundles", label: "Bundles & Combos", route: "#/bundles", icon: "package" },
+      { id: "cat-serials", label: "Serials & Batches", route: "#/serials-batches", icon: "scan-line" },
+      { id: "cat-pricelists", label: "Price Lists", route: "#/price-lists", icon: "tag" },
+    ],
+  },
+  // ── Inventory & Warehousing ──────────────────────────────────────────────
   {
     id: "inventory",
-    label: "Inventory",
+    label: "Inventory & Warehouse",
     icon: icons.inventory,
     items: [
-      { id: "inventory-dashboard",   label: "Dashboard",    route: "#/inventory/dashboard",   icon: "layout-dashboard" },
-      { id: "inventory-products",    label: "Products",     route: "#/inventory/products",    icon: "package" },
-      { id: "inventory-movements",   label: "Movements",    route: "#/inventory/movements",   icon: "arrow-right-left" },
-      { id: "inventory-adjustments", label: "Adjustments",  route: "#/inventory/adjustments", icon: "sliders-horizontal" },
-      { id: "inventory-valuation",   label: "Valuation",    route: "#/inventory/valuation",   icon: "wallet" },
-      { id: "inventory-reports",     label: "Reports",      route: "#/inventory/reports",     icon: "file-text" },
-      { id: "inventory-analytics",   label: "Analytics",    route: "#/inventory/analytics",   icon: "chart-column" },
+      { id: "inventory-dashboard", label: "Dashboard", route: "#/inventory/dashboard", icon: "layout-dashboard" },
+      { id: "enterprise-warehouses", label: "Warehouses", route: "#/enterprise/warehouses", icon: "warehouse" },
+      { id: "enterprise-locations", label: "Locations & Bins", route: "#/enterprise/locations", icon: "map-pin" },
+      { id: "inventory-movements", label: "Stock Movements", route: "#/inventory/movements", icon: "arrow-right-left" },
+      { id: "inventory-adjustments", label: "Stock Adjustments", route: "#/inventory/adjustments", icon: "sliders-horizontal" },
+      { id: "tr2-transfers", label: "Stock Transfers", route: "#/stock-transfers", icon: "arrow-left-right" },
+      { id: "tr2-putaway", label: "Put-Away", route: "#/put-away", icon: "package-open" },
+      { id: "tr2-replen", label: "Replenishment", route: "#/replenishment", icon: "refresh-cw" },
+      { id: "i2-cycle", label: "Cycle Count", route: "#/cycle-count", icon: "clipboard-check" },
+      { id: "inventory-valuation", label: "Valuation", route: "#/inventory/valuation", icon: "wallet" },
+      { id: "i2-abc", label: "ABC Analysis", route: "#/abc-analysis", icon: "chart-pie" },
+      { id: "i2-aging", label: "Inventory Aging", route: "#/inventory-aging", icon: "hourglass" },
+      { id: "i2-reorder", label: "Reorder Alerts", route: "#/reorder-alerts", icon: "bell-ring" },
     ],
   },
-
-  // ── Purchasing ─────────────────────────────────────────────────────────────
+  // ── Purchasing ───────────────────────────────────────────────────────────
   {
     id: "purchasing",
     label: "Purchasing",
     icon: icons.purchases,
     items: [
-      { id: "suppliers",         label: "Suppliers",         route: "#/suppliers",         icon: "truck" },
-      { id: "purchase-orders",   label: "Purchase Orders",   route: "#/purchases",         icon: "clipboard-list" },
-      { id: "purchase-returns",  label: "Purchase Returns",  route: "#/purchase-returns",  icon: "rotate-ccw" },
+      { id: "suppliers", label: "Suppliers", route: "#/suppliers", icon: "truck" },
+      { id: "purchase-orders", label: "Purchase Orders", route: "#/purchases", icon: "clipboard-list" },
+      { id: "sup2-receipts", label: "Goods Receipt", route: "#/goods-receipt", icon: "package-check" },
+      { id: "sup2-returns", label: "Purchase Returns", route: "#/purchase-returns", icon: "package-x" },
     ],
   },
-
-  // ── Products & Catalog ─────────────────────────────────────────────────────
-  {
-    id: "products",
-    label: "Products",
-    icon: icons.box,
-    items: [
-      { id: "products-all",        label: "All Products", route: "#/products",    icon: "package" },
-      { id: "products-categories", label: "Categories",   route: "#/categories",  icon: "folder" },
-      { id: "products-brands",     label: "Brands",       route: "#/brands",      icon: "tag" },
-      { id: "products-variants",   label: "Variants",     route: "#/variants",    icon: "layers" },
-    ],
-  },
-
-  // ── Customers ─────────────────────────────────────────────────────────────
+  // ── Customers ────────────────────────────────────────────────────────────
   {
     id: "crm",
     label: "Customers",
     icon: icons.customers,
     items: [
       { id: "customers-list", label: "Customer List", route: "#/customers", icon: "users" },
+      { id: "cust2-360", label: "Customer 360°", route: "#/customer-360", icon: "user-round-search" },
+      { id: "cust2-credit", label: "Credit Limits", route: "#/credit-limits", icon: "badge-dollar-sign" },
     ],
   },
-
-  // ── Reporting ─────────────────────────────────────────────────────────────
-  {
-    id: "reporting",
-    label: "Reporting",
-    icon: icons.chart,
-    items: [
-      { id: "report-sales",    label: "Sales Report",    route: "#/reports/sales",       icon: "trending-up" },
-      { id: "report-products", label: "Product Report",  route: "#/reports/products",    icon: "package" },
-      { id: "report-stock",    label: "Stock Report",    route: "#/reports/stock",       icon: "boxes" },
-      { id: "report-tax",      label: "Tax Report",      route: "#/reports/tax",         icon: "percent" },
-      { id: "report-pl",       label: "Profit & Loss",   route: "#/reports/profit-loss", icon: "bar-chart-2" },
-      { id: "report-cashflow", label: "Cash Flow",       route: "#/reports/cash-flow",   icon: "arrow-right-left" },
-      { id: "report-customer", label: "Customer Report", route: "#/reports/customer",    icon: "users" },
-      { id: "report-supplier", label: "Supplier Report", route: "#/reports/supplier",    icon: "truck" },
-      { id: "report-employee", label: "Employee Report", route: "#/reports/employee",    icon: "user-check" },
-    ],
-  },
-
-  // ── Enterprise (Multi-Store & Warehouses) ─────────────────────────────────
-  {
-    id: "enterprise",
-    label: "Enterprise",
-    icon: icons.building,
-    items: [
-      { id: "enterprise-dashboard",  label: "Store Dashboard",  route: "#/enterprise/dashboard",  icon: "layout-dashboard" },
-      { id: "enterprise-stores",     label: "Stores",           route: "#/enterprise/stores",     icon: "store" },
-      { id: "enterprise-warehouses", label: "Warehouses",       route: "#/enterprise/warehouses", icon: "warehouse" },
-      { id: "enterprise-transfers",  label: "Stock Transfers",  route: "#/enterprise/transfers",  icon: "arrow-right-left" },
-      { id: "enterprise-locations",  label: "Locations & Bins", route: "#/enterprise/locations",  icon: "map-pin" },
-    ],
-  },
-
-  // ── Accounting ─────────────────────────────────────────────────────────────
-  {
-    id: "accounting",
-    label: "Accounting",
-    icon: icons.calculator,
-    items: [
-      { id: "accounting-accounts",   label: "Chart of Accounts",route: "#/accounting/accounts",   icon: "list" },
-      { id: "accounting-journal",    label: "Journal Entries",  route: "#/accounting/journal",    icon: "book-open" },
-      { id: "accounting-ledger",     label: "General Ledger",   route: "#/accounting/ledger",     icon: "book" },
-      { id: "accounting-trial",      label: "Trial Balance",    route: "#/accounting/trial-balance", icon: "scale" },
-      { id: "accounting-balance",    label: "Balance Sheet",    route: "#/accounting/balance-sheet", icon: "landmark" },
-      { id: "accounting-expenses",   label: "Expenses",         route: "#/accounting/expenses",   icon: "receipt" },
-    ],
-  },
-
-  // ── HR / Employees ─────────────────────────────────────────────────────────
+  // ── HR & Payroll ─────────────────────────────────────────────────────────
   {
     id: "hr",
     label: "HR & Payroll",
     icon: icons.briefcase,
     items: [
-      { id: "hr-employees",          label: "Employees",        route: "#/hr/employees",          icon: "users" },
-      { id: "hr-attendance",         label: "Attendance",       route: "#/hr/attendance",         icon: "clock" },
-      { id: "hr-shifts",             label: "Shifts",           route: "#/hr/shifts",             icon: "calendar-days" },
-      { id: "hr-leave",              label: "Leave Requests",   route: "#/hr/leave",              icon: "calendar-off" },
-      { id: "hr-payroll",            label: "Payroll",          route: "#/hr/payroll",            icon: "banknote" },
+      { id: "hr-employees", label: "Employees", route: "#/employees", icon: "users" },
+      { id: "hr-attendance", label: "Attendance", route: "#/hr/attendance", icon: "clock" },
+      { id: "hr-shifts", label: "Shifts", route: "#/shifts", icon: "calendar-days" },
+      { id: "hr-leave", label: "Leave Requests", route: "#/hr/leave", icon: "calendar-off" },
+      { id: "hr-payroll", label: "Payroll", route: "#/payroll", icon: "banknote" },
+      { id: "hr2-commissions", label: "Commissions", route: "#/commissions", icon: "banknote" },
     ],
   },
-
-  // ── Loyalty & Promotions ───────────────────────────────────────────────────
+  // ── Accounting ───────────────────────────────────────────────────────────
   {
-    id: "loyalty",
-    label: "Loyalty & Promos",
-    icon: icons.award,
+    id: "accounting",
+    label: "Accounting",
+    icon: icons.calculator,
     items: [
-      { id: "loyalty-program",       label: "Loyalty Program",  route: "#/loyalty",               icon: "award" },
-      { id: "loyalty-memberships",   label: "Memberships",      route: "#/loyalty/memberships",   icon: "medal" },
-      { id: "loyalty-giftcards",     label: "Gift Cards",       route: "#/loyalty/gift-cards",    icon: "gift" },
-      { id: "loyalty-coupons",       label: "Coupons",          route: "#/loyalty/coupons",       icon: "ticket" },
-      { id: "loyalty-promotions",    label: "Promotions",       route: "#/loyalty/promotions",    icon: "percent" },
+      { id: "accounting-accounts", label: "Chart of Accounts", route: "#/accounting/accounts", icon: "list" },
+      { id: "accounting-journal", label: "Journal Entries", route: "#/accounting/journal", icon: "book-open" },
+      { id: "accounting-ledger", label: "General Ledger", route: "#/accounting/ledger", icon: "book" },
+      { id: "accounting-trial", label: "Trial Balance", route: "#/accounting/trial-balance", icon: "scale" },
+      { id: "accounting-balance", label: "Balance Sheet", route: "#/accounting/balance-sheet", icon: "landmark" },
+      { id: "accounting-expenses", label: "Expenses", route: "#/accounting/expenses", icon: "receipt" },
     ],
   },
-
-  // ── Operations & Workflow ──────────────────────────────────────────────────
+  // ── Payments & Loyalty ───────────────────────────────────────────────────
   {
-    id: "workflow",
-    label: "Operations",
-    icon: icons.checkSquare,
+    id: "payments",
+    label: "Payments & Loyalty",
+    icon: `<i data-lucide="wallet" width="18" height="18" stroke-width="1.8"></i>`,
     items: [
-      { id: "workflow-approvals",    label: "Approvals",        route: "#/workflow/approvals",    icon: "check-circle" },
-      { id: "workflow-notifications",label: "Notifications",    route: "#/notifications",         icon: "bell" },
+      { id: "loyalty-program", label: "Loyalty Program", route: "#/loyalty", icon: "award" },
+      { id: "loyalty-memberships", label: "Memberships", route: "#/loyalty/memberships", icon: "medal" },
+      { id: "pay2-giftcards", label: "Gift Cards", route: "#/gift-cards", icon: "credit-card" },
+      { id: "loyalty-coupons", label: "Coupons", route: "#/loyalty/coupons", icon: "ticket" },
+      { id: "loyalty-promotions", label: "Promotions", route: "#/loyalty/promotions", icon: "percent" },
+      { id: "pay2-recon", label: "Reconciliation", route: "#/reconciliation", icon: "scale" },
     ],
   },
-
-  // ── Configuration ─────────────────────────────────────────────────────────
+  // ── Reporting & Analytics ────────────────────────────────────────────────
+  {
+    id: "reporting",
+    label: "Reporting & Analytics",
+    icon: icons.chart,
+    items: [
+      { id: "rep2-dashboard", label: "Sales Dashboard", route: "#/analytics", icon: "line-chart" },
+      { id: "rep2-zreport", label: "Z-Reports", route: "#/z-reports", icon: "receipt" },
+      { id: "report-sales", label: "Sales Report", route: "#/reports/sales", icon: "trending-up" },
+      { id: "report-products", label: "Product Report", route: "#/reports/products", icon: "package" },
+      { id: "report-stock", label: "Stock Report", route: "#/reports/stock", icon: "boxes" },
+      { id: "report-pl", label: "Profit & Loss", route: "#/reports/profit-loss", icon: "bar-chart-2" },
+      { id: "report-cashflow", label: "Cash Flow", route: "#/reports/cash-flow", icon: "arrow-right-left" },
+      { id: "report-customer", label: "Customer Report", route: "#/reports/customer", icon: "users" },
+      { id: "report-supplier", label: "Supplier Report", route: "#/reports/supplier", icon: "truck" },
+      { id: "report-employee", label: "Employee Report", route: "#/reports/employee", icon: "user-check" },
+      { id: "report-tax", label: "Tax Report", route: "#/reports/tax", icon: "percent" },
+    ],
+  },
+  // ── Fiscal ───────────────────────────────────────────────────────────────
+  {
+    id: "fiscal2",
+    label: "Fiscal",
+    icon: `<i data-lucide="file-check-2" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "fis2-invoices", label: "E-Invoices", route: "#/fiscal-invoices", icon: "receipt-text" },
+      { id: "fis2-devices", label: "Fiscal Devices", route: "#/fiscal-devices", icon: "printer" },
+    ],
+  },
+  // ── Settings & Configuration ─────────────────────────────────────────────
   {
     id: "configuration",
-    label: "Configuration",
+    label: "Settings & Config",
     icon: icons.gear,
     items: [
-      { id: "settings",      label: "Settings",           route: "#/settings",  icon: "settings" },
-      { id: "users",         label: "Users",              route: "#/users",     icon: "user" },
-      { id: "roles",         label: "Roles & Permissions", route: "#/roles",    icon: "shield" },
-      { id: "taxes",         label: "Taxes",              route: "#/taxes",     icon: "percent" },
-      { id: "payments",      label: "Payment Methods",    route: "#/payments",  icon: "credit-card" },
+      { id: "settings", label: "General Settings", route: "#/settings", icon: "settings" },
+      { id: "ten2-branches", label: "Branches", route: "#/branches", icon: "git-branch" },
+      { id: "users", label: "Users", route: "#/users", icon: "user" },
+      { id: "rbac2-roles", label: "Roles & Permissions", route: "#/roles", icon: "shield" },
+      { id: "rbac2-perms", label: "My Permissions", route: "#/my-permissions", icon: "key-round" },
+      { id: "tax2-rates", label: "Tax Rates", route: "#/tax-rates", icon: "landmark" },
+      { id: "payments", label: "Payment Methods", route: "#/payments", icon: "credit-card" },
+      { id: "i18n2-locale", label: "Language & Currency", route: "#/locale", icon: "languages" },
+      { id: "i18n2-currencies", label: "Currencies", route: "#/currencies", icon: "dollar-sign" },
     ],
   },
-
-  // ── Security ──────────────────────────────────────────────────────────────
+  // ── Operations & Security ────────────────────────────────────────────────
   {
-    id: "security",
-    label: "Security",
+    id: "operations",
+    label: "Operations & Security",
     icon: icons.shield,
     items: [
-      { id: "security-center",   label: "Security Center",  route: "#/security",          icon: "shield-check" },
-      { id: "security-sessions", label: "Active Sessions",  route: "#/security/sessions",  icon: "monitor" },
-      { id: "security-audit",    label: "Audit Logs",       route: "#/security/audit",     icon: "scroll-text" },
-      { id: "security-tokens",   label: "API Tokens",       route: "#/security/tokens",    icon: "key" },
-      { id: "security-devices",  label: "Trusted Devices",  route: "#/security/devices",   icon: "smartphone" },
+      { id: "workflow-approvals", label: "Approvals", route: "#/workflow/approvals", icon: "check-circle" },
+      { id: "notif2-center", label: "Notifications", route: "#/notifications", icon: "bell-ring" },
+      { id: "notif2-rules", label: "Alert Rules", route: "#/alert-rules", icon: "sliders-horizontal" },
+      { id: "security-sessions", label: "Active Sessions", route: "#/security/sessions", icon: "monitor" },
+      { id: "aud2-log", label: "Audit Logs", route: "#/audit", icon: "history" },
+      { id: "aud2-feed", label: "Activity Feed", route: "#/activity", icon: "activity" },
+      { id: "security-tokens", label: "API Tokens", route: "#/security/tokens", icon: "key" },
     ],
   },
-
-  // ── System ────────────────────────────────────────────────────────────────
+  // ── Integrations ─────────────────────────────────────────────────────────
+  {
+    id: "integrations2",
+    label: "Integrations",
+    icon: `<i data-lucide="plug" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "int2-hub", label: "Integration Hub", route: "#/integrations", icon: "shuffle" },
+      { id: "int2-logs", label: "Sync Logs", route: "#/sync-logs", icon: "scroll-text" },
+      { id: "off-queue", label: "Offline Sync Queue", route: "#/sync-queue", icon: "refresh-cw" },
+    ],
+  },
+  // ── System ───────────────────────────────────────────────────────────────
   {
     id: "system",
     label: "System",
     icon: icons.database,
     items: [
-      { id: "hardware",  label: "Hardware Setup",   route: "#/hardware",   icon: "printer" },
-      { id: "backup",    label: "Backup & Restore", route: "#/backup",     icon: "hard-drive-download" },
-      { id: "dev-tools", label: "Developer Tools",  route: "#/dev-tools",  icon: "terminal" },
+      { id: "hardware", label: "Hardware Setup", route: "#/hardware", icon: "printer" },
+      { id: "backup", label: "Backup & Restore", route: "#/backup", icon: "hard-drive-download" },
+      { id: "dev-tools", label: "Developer Tools", route: "#/dev-tools", icon: "terminal" },
+    ],
+  },
+  // ── AI Assistant ─────────────────────────────────────────────────────────
+  {
+    id: "ai2",
+    label: "AI Assistant",
+    icon: `<i data-lucide="sparkles" width="18" height="18" stroke-width="1.8"></i>`,
+    items: [
+      { id: "ai2-ask", label: "Ask Assistant", route: "#/assistant", icon: "message-circle-question" },
+      { id: "ai2-reorder", label: "Reorder Suggestions", route: "#/reorder-suggestions", icon: "package-search" },
     ],
   },
 ];
@@ -339,20 +288,23 @@ const state = {
   collapsed: false,
   activeItem: "",
   openSections: {
-    orders: true,
+    saas: false,
+    pos2: false,
+    orders: false,
+    catalog: true,
     inventory: true,
     purchasing: false,
-    products: true,
     crm: false,
-    enterprise: false,
-    accounting: false,
     hr: false,
-    loyalty: false,
-    workflow: false,
+    accounting: false,
+    payments: false,
     reporting: false,
+    fiscal2: false,
     configuration: false,
-    security: false,
+    operations: false,
+    integrations2: false,
     system: false,
+    ai2: false,
   },
 };
 
@@ -370,11 +322,10 @@ function renderSection(section, collapsed) {
         data-route="${item.route}"
         data-tooltip="${item.label}"
         class="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors
-        ${
-          state.activeItem === (item.id ?? item.label)
-            ? "text-accent bg-accent/10"
-            : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
-        }">
+        ${state.activeItem === (item.id ?? item.label)
+        ? "text-accent bg-accent/10"
+        : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
+      }">
         ${item.label}
       </button>
     `)
@@ -387,36 +338,32 @@ function renderSection(section, collapsed) {
         data-sidebar-open
         data-tooltip="${section.label}"
         ${collapsed ? `data-sidebar-open` : ""}
-        class="w-full flex items-center ${
-          collapsed ? "justify-center" : "justify-between"
-        } px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/5 transition-colors"
+        class="w-full flex items-center ${collapsed ? "justify-center" : "justify-between"
+    } px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/5 transition-colors"
       >
         <span class="flex items-center ${collapsed ? "" : "gap-3"}">
           <span class="text-gray-400 shrink-0">${section.icon}</span>
-          ${
-            collapsed
-              ? ""
-              : `<span class="text-sm font-semibold">${section.label}</span>`
-          }
+          ${collapsed
+      ? ""
+      : `<span class="text-sm font-semibold">${section.label}</span>`
+    }
         </span>
 
-        ${
-          collapsed
-            ? ""
-            : `<span class="text-gray-500 ${isOpen ? "" : "-rotate-90"}">${icons.chevron}</span>`
-        }
+        ${collapsed
+      ? ""
+      : `<span class="text-gray-500 ${isOpen ? "" : "-rotate-90"}">${icons.chevron}</span>`
+    }
       </button>
 
-      ${
-        !collapsed && isOpen
-          ? `
+      ${!collapsed && isOpen
+      ? `
           <div class="relative mt-1 ml-[20px] pl-[26px] space-y-0.5">
             <span class="absolute left-0 top-1 bottom-1 w-px bg-gray-600"></span>
             ${itemsHtml}
           </div>
           `
-          : ""
-      }
+      : ""
+    }
     </div>
   `;
 }
@@ -442,9 +389,9 @@ export function Sidebar() {
     >
       <div class="w-8 h-8 shrink-0 rounded-full overflow-hidden flex items-center justify-center">
         ${company?.logo
-          ? `<img src="${company.logo.startsWith("http") ? company.logo : `http://127.0.0.1:8000${company.logo}`}" alt="${company.name || "Company"}" class="w-full h-full object-cover">`
-          : icons.logo
-        }
+      ? `<img src="${company.logo.startsWith("http") ? company.logo : `http://127.0.0.1:8000${company.logo}`}" alt="${company.name || "Company"}" class="w-full h-full object-cover">`
+      : icons.logo
+    }
       </div>
       ${collapsed ? "" : `<span class="text-white font-bold text-[14px] tracking-tight">${company?.name || "POS SYSTEM"}</span>`}
     </button>
@@ -475,23 +422,20 @@ export function Sidebar() {
     data-route="#/dashboard"
     data-tooltip="Dashboard"
     data-sidebar-open
-    class="w-full flex items-center ${
-      collapsed ? "justify-center" : "gap-3"
+    class="w-full flex items-center ${collapsed ? "justify-center" : "gap-3"
     } px-3 py-2.5 rounded-lg transition-colors
-    ${
-      state.activeItem === "Dashboard"
-        ? "bg-accent/10 text-accent"
-        : "text-gray-200 hover:bg-white/5"
+    ${state.activeItem === "Dashboard"
+      ? "bg-accent/10 text-accent"
+      : "text-gray-200 hover:bg-white/5"
     }"
   >
     <span class="shrink-0">
       ${icons.home}
     </span>
 
-    ${
-      collapsed
-        ? ""
-        : `<span class="text-sm font-semibold">Dashboard</span>`
+    ${collapsed
+      ? ""
+      : `<span class="text-sm font-semibold">Dashboard</span>`
     }
   </button>
 </div>
@@ -504,23 +448,20 @@ export function Sidebar() {
     data-sidebar-open
     data-tooltip="Point Of Sale"
     data-sidebar-open
-    class="w-full flex items-center ${
-      collapsed ? "justify-center" : "gap-3"
+    class="w-full flex items-center ${collapsed ? "justify-center" : "gap-3"
     } px-3 py-2.5 rounded-lg transition-colors
-    ${
-      state.activeItem === "POS"
-        ? "bg-accent/10 text-accent"
-        : "text-gray-200 hover:bg-white/5"
+    ${state.activeItem === "POS"
+      ? "bg-accent/10 text-accent"
+      : "text-gray-200 hover:bg-white/5"
     }"
   >
     <span class="shrink-0">
       ${icons.pos}
     </span>
 
-    ${
-      collapsed
-        ? ""
-        : `<span class="text-sm font-semibold">Point Of Sale</span>`
+    ${collapsed
+      ? ""
+      : `<span class="text-sm font-semibold">Point Of Sale</span>`
     }
   </button>
 </div>
@@ -540,9 +481,9 @@ export function Sidebar() {
     >
       <span class="shrink-0">${darkMode ? icons.sun : icons.moon}</span>
       ${collapsed
-        ? `<span class="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-white text-slate-900 text-sm font-medium px-3 py-2 rounded-lg shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">${darkMode ? "Light Mode" : "Dark Mode"}</span>`
-        : `<span class="text-sm font-semibold">${darkMode ? "Light Mode" : "Dark Mode"}</span>`
-      }
+      ? `<span class="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-white text-slate-900 text-sm font-medium px-3 py-2 rounded-lg shadow-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">${darkMode ? "Light Mode" : "Dark Mode"}</span>`
+      : `<span class="text-sm font-semibold">${darkMode ? "Light Mode" : "Dark Mode"}</span>`
+    }
     </button>
   </div>
 
@@ -680,18 +621,18 @@ function wireSidebarEvents() {
 
     button.addEventListener("mouseenter", () => {
 
-        if (!state.collapsed) return;
+      if (!state.collapsed) return;
 
-        showTooltip(
-            button.dataset.tooltip,
-            button
-        );
+      showTooltip(
+        button.dataset.tooltip,
+        button
+      );
 
     });
 
     button.addEventListener("mouseleave", hideTooltip);
 
-});
+  });
 }
 
 export async function initializeSidebar() {

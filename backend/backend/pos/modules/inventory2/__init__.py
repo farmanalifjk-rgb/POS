@@ -1,1 +1,0 @@
-default_app_config = "pos.modules.inventory2.apps.Inventory2Config"

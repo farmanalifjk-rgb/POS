@@ -1,5 +1,5 @@
 from django.urls import path
-from ..modules.auth.views import (
+from auth_app.views import (
     LoginView, VerifyOTPView, ResendOTPView, LogoutView, MeView,
     MySessionsView, RevokeSessionView, ChangePasswordView, ExpiredPasswordChangeView,
     AdminUnlockAccountView, AdminRevokeUserSessionsView,

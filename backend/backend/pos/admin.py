@@ -71,7 +71,7 @@ admin.site.register(AuthToken)
 admin.site.register(OneTimePasscode)
 
 # ── Phase 3: Accounting ──────────────────────────────────────────────────────
-from pos.modules.accounting.models import (
+from accounting.models import (
     ChartOfAccount, JournalEntry, JournalEntryLine, ExpenseCategory, Expense
 )
 admin.site.register(ChartOfAccount)
@@ -81,7 +81,7 @@ admin.site.register(ExpenseCategory)
 admin.site.register(Expense)
 
 # ── Phase 3: HR ───────────────────────────────────────────────────────────────
-from pos.modules.hr.models import (
+from hr.models import (
     Department, Employee, Shift, Attendance,
     LeaveType, LeaveRequest, PayrollRun, PayrollEntry
 )
@@ -95,7 +95,7 @@ admin.site.register(PayrollRun)
 admin.site.register(PayrollEntry)
 
 # ── Phase 3: Loyalty ─────────────────────────────────────────────────────────
-from pos.modules.loyalty.models import (
+from loyalty.models import (
     LoyaltyProgram, MembershipTier, LoyaltyTransaction,
     Coupon, Promotion
 )
@@ -106,13 +106,13 @@ admin.site.register(Coupon)
 admin.site.register(Promotion)
 
 # ── Phase 3: Notifications ───────────────────────────────────────────────────
-from pos.modules.operations.models import EmailQueue, SMSQueue, InAppNotification
+from operations.models import EmailQueue, SMSQueue, InAppNotification
 
 admin.site.register(InAppNotification)
 admin.site.register(EmailQueue)
 admin.site.register(SMSQueue)
 
 # ── Phase 3: Workflow ────────────────────────────────────────────────────────
-from pos.modules.operations.models import ApprovalRule, ApprovalRequest
+from operations.models import ApprovalRule, ApprovalRequest
 admin.site.register(ApprovalRule)
 admin.site.register(ApprovalRequest)

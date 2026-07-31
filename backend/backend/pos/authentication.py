@@ -18,8 +18,8 @@ exactly as they do today until you choose to protect them.
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 
-from pos.modules.auth.models import AuthToken
-from pos.modules.system.models import SecuritySettings
+from auth_app.models import AuthToken
+from system.models import SecuritySettings
 
 
 class ExpiringTokenAuthentication(BaseAuthentication):

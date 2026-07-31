@@ -1,5 +1,5 @@
 from django.urls import path
-from ..modules.system.views import (
+from system.views import (
     CompanySettingsView, POSSettingsView, InventorySettingsView, TaxSettingsView,
     ReceiptSettingsView, NotificationSettingsView, BarcodeSettingsView,
     CustomerSettingsView, ProductSettingsView, SecuritySettingsView,
@@ -7,7 +7,7 @@ from ..modules.system.views import (
     AppearanceSettingsView, FeatureFlagsView, AboutInfoView, CheckUpdatesView,
     SettingsBundleView,
 )
-from ..modules.system.views import (
+from system.views import (
     StoreListView, StoreDetailView,
     HardwareDeviceListView, HardwareDeviceDetailView, HardwareDeviceTestView,
     CustomerGroupListView, CustomerGroupDetailView,
@@ -16,18 +16,18 @@ from ..modules.system.views import (
     ReceiptTemplateListView, ReceiptTemplateDetailView,
     NotificationListView, NotificationMarkReadView, NotificationMarkAllReadView, NotificationDeleteView,
 )
-from ..modules.system.views import (
+from system.views import (
     PasswordPolicyCheckView, IsLockedOutView, LoginAttemptListView,
     TrustedDeviceListView, TrustedDeviceAuthorizeView, TrustedDeviceRevokeView, TrustedDeviceDeleteView,
     AuditLogListView,
 )
-from ..modules.system.views import (
+from system.views import (
     BackupListView, BackupCreateView, BackupDownloadView, BackupRestoreView,
     ExportDatabaseView, ImportDatabaseView,
     ExportProductsView, ImportProductsView, ExportCustomersView, ImportCustomersView,
     ExportInventoryView, ExportSalesView, ClearCacheView, RebuildSearchIndexView, OptimizeDatabaseView,
 )
-from ..modules.system.views import (
+from system.views import (
     APIKeyListView, APIKeyDetailView, APIKeyRegenerateView,
     WebhookListView, WebhookDetailView, WebhookTestView, WebhookDeliveryListView,
     EmailTemplateListView, EmailTemplateDetailView,

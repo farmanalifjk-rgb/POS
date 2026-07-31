@@ -65,7 +65,7 @@ class Customer(models.Model):
 
     # ─── NEW: loyalty + grouping (Customer settings tab) ───────────────────
     group = models.ForeignKey(
-        "pos.CustomerGroup", on_delete=models.SET_NULL, null=True, blank=True, related_name="customers"
+        'system.CustomerGroup', on_delete=models.SET_NULL, null=True, blank=True, related_name="customers"
     )
     loyalty_points = models.PositiveIntegerField(default=0)
     date_of_birth = models.DateField(null=True, blank=True)
@@ -670,10 +670,10 @@ class UserProfile(models.Model):
 
 # NEW settings-module models live in models_settings.py, imported here so
 # Django app registry discovers them.
-from .modules.system.models import *  # noqa
+from system.models import *  # noqa
 
 # NEW auth models (expiring tokens, OTPs) live in models_auth.py.
-from .modules.auth.models import *  # noqa
+from auth_app.models import *  # noqa
 
 # Enterprise location and warehouse models.
-from .modules.enterprise.models import *  # noqa
+from enterprise.models import *  # noqa

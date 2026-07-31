@@ -1,0 +1,1 @@
+default_app_config = "hr2.apps.HR2Config"

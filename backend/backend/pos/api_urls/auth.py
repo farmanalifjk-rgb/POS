@@ -1,5 +1,5 @@
 from django.urls import path
-from ..modules.auth.views import (OpenSessionView,ActiveSessionView,CloseSessionView,)
+from auth_app.views import (OpenSessionView,ActiveSessionView,CloseSessionView,)
 
 urlpatterns = [
     path("session/open/",OpenSessionView.as_view(),name="session-open",),

@@ -1,0 +1,10 @@
+{
+  "name": "OmniPOS Enterprise",
+  "short_name": "OmniPOS",
+  "description": "Enterprise-grade point-of-sale platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": []
+}

@@ -1,1 +1,0 @@
-default_app_config = "pos.modules.customers2.apps.Customers2Config"
