@@ -7,7 +7,7 @@
 import { createIcons, icons } from "lucide";
 import Auth from "../../core/controllers/Auth.js";
 
-const BASE = "http://127.0.0.1:8000/api";
+const BASE = (import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api");
 let _all = [];
 let _suppliers = [];
 let _products  = [];

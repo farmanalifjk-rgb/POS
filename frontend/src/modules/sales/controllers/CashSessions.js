@@ -5,7 +5,7 @@ import { createIcons, icons } from "lucide";
 import Auth from "../../core/controllers/Auth.js";
 import { loadDropdown, initializeDropdown } from "../../../shared/DropDown.js";
 
-const BASE = "http://127.0.0.1:8000/api";
+const BASE = (import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api");
 let _all = [];
 let _activeSession = null;
 let _txType = 'in'; // 'in' or 'out'
@@ -674,4 +674,3 @@ window.exportCSV = () => triggerDownload(buildExportUrl("csv"), "cash_sessions.c
 window.exportExcel = () => triggerDownload(buildExportUrl("excel"), "cash_sessions.xlsx");
 window.exportPdf = () => triggerDownload(buildExportUrl("pdf"), "cash_sessions.pdf");
 window.printCashSessionReport = (id) => triggerDownload(buildExportUrl("pdf", id), `cash_session_${id}.pdf`);
-

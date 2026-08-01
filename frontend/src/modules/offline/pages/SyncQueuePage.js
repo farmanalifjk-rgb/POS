@@ -1,6 +1,5 @@
 import { createIcons } from "lucide";
 import { getQueue, flushQueue, removeFromQueue } from "../syncQueue";
-import { isOnline } from "../registerSW";
 
 export function renderSyncQueuePage(root) {
   render(root);
@@ -10,7 +9,7 @@ export function renderSyncQueuePage(root) {
 
 function render(root) {
   const queue = getQueue();
-  const online = isOnline();
+  const online = typeof navigator !== "undefined" ? navigator.onLine : true;
   root.innerHTML = `
     <div class="p-8 max-w-3xl mx-auto">
       <div class="flex items-center justify-between mb-6">

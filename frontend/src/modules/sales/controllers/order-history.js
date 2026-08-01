@@ -231,7 +231,7 @@ async function loadOrders() {
 
   if (currentStatus) params.append("status", currentStatus);
 
-  const url = `http://127.0.0.1:8000/api/order-history/?${params.toString()}`;
+  const url = `import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"/order-history/?${params.toString()}`;
 
   const response = await fetch(url);
 
@@ -465,9 +465,9 @@ async function viewOrder(orderId, type) {
   let url = "";
 
   if (type === "draft") {
-    url = `http://127.0.0.1:8000/api/draft-orders/${orderId}/`;
+    url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/draft-orders/${orderId}/`;
   } else {
-    url = `http://127.0.0.1:8000/api/order-history/${orderId}/`;
+    url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/order-history/${orderId}/`;
   }
 
   const response = await fetch(url);
@@ -996,7 +996,7 @@ function updateOrderStats(data, orders) {
 
 async function openRefund(orderId) {
   const response = await fetch(
-    `http://127.0.0.1:8000/api/refund/${orderId}/`
+    `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund/${orderId}/`
   );
 
   const refund = await response.json();
@@ -1250,7 +1250,7 @@ async function processRefund(orderId) {
   const reason = document.getElementById("refund-reason").value;
 
   const response = await fetch(
-    "http://127.0.0.1:8000/api/refund/process/",
+    `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund/process/`,
 
     {
       method: "POST",
@@ -1400,7 +1400,7 @@ async function loadRefundHistory(resetPage = true) {
   params.append("page", currentPage);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/api/refund-history/?${params.toString()}`,
+    `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund-history/?${params.toString()}`,
   );
 
   const data = await response.json();
@@ -1613,7 +1613,7 @@ function animateCounter(element, target, duration = 900) {
 
 async function loadOrderStats() {
   const response = await fetch(
-    "http://127.0.0.1:8000/api/order-stats/"
+    `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/order-stats/`
   );
 
   if (!response.ok) return;
@@ -1644,7 +1644,7 @@ async function loadOrderStats() {
 
 async function viewRefund(refundId) {
   const response = await fetch(
-    `http://127.0.0.1:8000/api/refund-history/detail/${refundId}/`,
+    `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund-history/detail/${refundId}/`,
   );
 
   const refund = await response.json();
@@ -1926,7 +1926,7 @@ async function exportCSV() {
 
     if (currentView === "refunds") {
 
-        url = `http://127.0.0.1:8000/api/refund-history/export/csv/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund-history/export/csv/?${params}`;
 
         filename = "refund-history.csv";
 
@@ -1935,7 +1935,7 @@ async function exportCSV() {
         if (currentStatus)
             params.append("status", currentStatus);
 
-        url = `http://127.0.0.1:8000/api/order-history/export/csv/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/order-history/export/csv/?${params}`;
 
         filename = "orders.csv";
     }
@@ -1952,12 +1952,12 @@ async function exportExcel() {
 
     if (currentView === "refunds") {
 
-        url = `http://127.0.0.1:8000/api/refund-history/export/excel/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund-history/export/excel/?${params}`;
         filename = "refund-history.xlsx";
 
     } else if (currentStatus === "draft") {
 
-        url = `http://127.0.0.1:8000/api/draft-orders/export/excel/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/draft-orders/export/excel/?${params}`;
         filename = "draft-orders.xlsx";
 
     } else {
@@ -1965,7 +1965,7 @@ async function exportExcel() {
         if (currentStatus)
             params.append("status", currentStatus);
 
-        url = `http://127.0.0.1:8000/api/order-history/export/excel/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/order-history/export/excel/?${params}`;
         filename = "orders.xlsx";
     }
 
@@ -1982,12 +1982,12 @@ async function exportPdf() {
 
     if (currentView === "refunds") {
 
-        url = `http://127.0.0.1:8000/api/refund-history/export/pdf/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/refund-history/export/pdf/?${params}`;
         filename = "refund-history.pdf";
 
     } else if (currentStatus === "draft") {
 
-        url = `http://127.0.0.1:8000/api/draft-orders/export/pdf/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/draft-orders/export/pdf/?${params}`;
         filename = "draft-orders.pdf";
 
     } else {
@@ -1995,7 +1995,7 @@ async function exportPdf() {
         if (currentStatus)
             params.append("status", currentStatus);
 
-        url = `http://127.0.0.1:8000/api/order-history/export/pdf/?${params}`;
+        url = `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/order-history/export/pdf/?${params}`;
         filename = "orders.pdf";
     }
 

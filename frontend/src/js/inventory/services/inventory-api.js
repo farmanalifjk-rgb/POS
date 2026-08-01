@@ -1,63 +1,53 @@
-/**
- * inventory-api.js — Central API service layer
- *
- * All requests attach the stored auth token automatically.
- * Import Auth to read the header; Auth is loaded as a side-effect of main.js
- * which imports Auth.js first, so window.Auth is always set when these run.
- */
+import apiService from "../../services/api.service.js";
+import productService from "../../services/product.service.js";
+import inventoryService from "../../services/inventory.service.js";
 
-const BASE_URL = "http://127.0.0.1:8000/api";
-
-// ── Auth header helper ────────────────────────────────────────────────────────
-function authHeaders(extra = {}) {
-  const token = localStorage.getItem("pos_token");
-  return token
-    ? { Authorization: `Token ${token}`, ...extra }
-    : { ...extra };
-}
-
-// ── Internal helpers ──────────────────────────────────────────────────────────
+const BASE_URL = apiService.baseURL;
 
 async function request(url) {
-    const response = await fetch(url, { headers: authHeaders() });
-    if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-    }
-    return response.json();
+  const endpoint = url.replace(BASE_URL, "");
+  const res = await apiService.get(endpoint);
+  if (!res.ok) {
+    throw new Error(res.error || `HTTP ${res.status}`);
+  }
+  return res.data;
 }
 
 async function mutate(url, method, data) {
-    const response = await fetch(url, {
-        method,
-        headers: authHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw Object.assign(new Error(`HTTP ${response.status}`), { data: err });
-    }
-    if (response.status === 204) return null;
-    return response.json();
+  const endpoint = url.replace(BASE_URL, "");
+  let res;
+  if (method === "POST") res = await apiService.post(endpoint, data);
+  else if (method === "PUT") res = await apiService.put(endpoint, data);
+  else if (method === "PATCH") res = await apiService.patch(endpoint, data);
+  else if (method === "DELETE") res = await apiService.delete(endpoint);
+  
+  if (!res.ok) {
+    throw Object.assign(new Error(res.error || `HTTP ${res.status}`), { data: res.data });
+  }
+  return res.data;
 }
 
 async function mutateForm(url, method, formData) {
-    const response = await fetch(url, { method, headers: authHeaders(), body: formData });
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw Object.assign(new Error(`HTTP ${response.status}`), { data: err });
-    }
-    if (response.status === 204) return null;
-    return response.json();
+  const endpoint = url.replace(BASE_URL, "");
+  let res;
+  if (method === "POST") res = await apiService.post(endpoint, formData);
+  else if (method === "PUT") res = await apiService.put(endpoint, formData);
+  else if (method === "PATCH") res = await apiService.patch(endpoint, formData);
+
+  if (!res.ok) {
+    throw Object.assign(new Error(res.error || `HTTP ${res.status}`), { data: res.data });
+  }
+  return res.data;
 }
 
 function buildParams(filters = {}) {
-    const params = new URLSearchParams();
-    Object.entries(filters).forEach(([key, value]) => {
-        if (value !== "" && value !== null && value !== undefined) {
-            params.append(key, value);
-        }
-    });
-    return params.toString();
+  const params = new URLSearchParams();
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== "" && value !== null && value !== undefined) {
+      params.append(key, value);
+    }
+  });
+  return params.toString();
 }
 
 

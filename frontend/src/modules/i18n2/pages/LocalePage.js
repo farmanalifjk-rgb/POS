@@ -1,6 +1,6 @@
 import { createIcons } from "lucide";
-import { setLanguage, setCurrency } from "../i18n";
-const API = "http://127.0.0.1:8000/api/i18n2";
+import { setLanguage, setCurrency } from "../i18n2.js";
+const API = "import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"/i18n2";
 const h = () => ({ "Content-Type": "application/json", Authorization: `Token ${localStorage.getItem("pos_token")}` });
 
 export function renderLocalePage(root) {

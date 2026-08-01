@@ -613,7 +613,7 @@ function buildExportUrl(format) {
     if (filters.end_date)
         params.append("end_date", filters.end_date);
 
-    return `http://127.0.0.1:8000/api/inventory/movements/export/${format}/?${params.toString()}`;
+    return `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/inventory/movements/export/${format}/?${params.toString()}`;
 }
 
 

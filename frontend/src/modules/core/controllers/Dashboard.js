@@ -6,7 +6,7 @@
 import { createIcons, icons } from "lucide";
 import Auth from "./Auth.js";
 
-const BASE = "http://127.0.0.1:8000/api";
+const BASE = (import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api");
 
 async function apiFetch(path) {
   const res = await fetch(`${BASE}${path}`, { headers: { ...Auth.authHeader() } });

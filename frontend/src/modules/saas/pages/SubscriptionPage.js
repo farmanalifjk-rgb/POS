@@ -1,6 +1,6 @@
 import { createIcons } from "lucide";
 
-const API = "http://127.0.0.1:8000/api/saas";
+const API = "import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"/saas";
 const token = () => localStorage.getItem("pos_token");
 const headers = () => ({ "Content-Type": "application/json", Authorization: `Token ${token()}` });
 

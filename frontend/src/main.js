@@ -202,6 +202,137 @@ function render(html, init) {
   init?.();
 }
 
+
+// ── Route Configuration ────────────────────────────────────────────────────────
+const routeConfig = [
+  // Core
+  { path: "/dashboard", page: Dashboard, init: () => window.loadDashboard?.() },
+  { path: "/pos", page: POSPage, init: () => window.initializePOS?.() },
+  { path: "/orders", page: OrderHistoryPage, init: () => window.initializeOrderHistory?.() },
+  { path: "/parked-orders", page: OrderHistoryPage, init: () => window.initializeOrderHistory?.() },
+  { path: "/receipt-designer", page: SettingsPage, init: () => window.initializeSettings?.() },
+  { path: "/cash-sessions", page: CashSessionsPage, init: () => window.initializeCashSessions?.() },
+
+  // SaaS Admin
+  { path: "/subscription", page: SettingsPage, init: () => window.initializeSettings?.() },
+  { path: "/tenants", page: StoresPage, init: () => window.initializeStores?.() },
+
+  // Catalog
+  { path: "/products", page: AllProductsPage, init: () => window.initializeAllProducts?.() },
+  { path: "/categories", page: CategoriesPage, init: () => window.initializeCategories?.() },
+  { path: "/brands", page: BrandsPage, init: () => window.initializeBrands?.() },
+  { path: "/variants", page: VariantsPage, init: () => window.initializeVariants?.() },
+  { path: "/bundles", page: AllProductsPage, init: () => window.initializeAllProducts?.() },
+  { path: "/serials-batches", page: AllProductsPage, init: () => window.initializeAllProducts?.() },
+  { path: "/price-lists", page: AllProductsPage, init: () => window.initializeAllProducts?.() },
+
+  // Inventory & Warehouse
+  { path: "/inventory/dashboard", page: InventoryPage, init: () => window.initializeInventory?.() },
+  { path: "/inventory/products", page: AllProductsPage, init: () => window.initializeAllProducts?.() },
+  { path: "/inventory/movements", page: MovementHistoryPage, init: () => window.initializeMovements?.() },
+  { path: "/inventory/adjustments", page: AdjustmentPage, init: () => window.initializeAdjustments?.() },
+  { path: "/inventory/valuation", page: InventoryValuationPage, init: () => window.initializeValuation?.() },
+  { path: "/inventory/reports", page: InventoryReportsPage, init: () => window.initializeInventoryReports?.() },
+  { path: "/inventory/analytics", page: InventoryAnalyticsPage, init: () => window.initializeInventoryAnalytics?.() },
+  { path: "/analytics", page: InventoryAnalyticsPage, init: () => window.initializeInventoryAnalytics?.() },
+  { path: "/enterprise/warehouses", page: WarehousesPage, init: () => window.initializeWarehouses?.() },
+  { path: "/enterprise/transfers", page: WarehouseTransfersPage, init: () => window.initializeWarehouseTransfers?.() },
+  { path: "/stock-transfers", page: WarehouseTransfersPage, init: () => window.initializeWarehouseTransfers?.() },
+  { path: "/enterprise/locations", page: LocationsZonesPage, init: () => window.initializeLocationsZones?.() },
+  { path: "/put-away", page: MovementHistoryPage, init: () => window.initializeMovements?.() },
+  { path: "/replenishment", page: AdjustmentPage, init: () => window.initializeAdjustments?.() },
+  { path: "/cycle-count", page: AdjustmentPage, init: () => window.initializeAdjustments?.() },
+  { path: "/abc-analysis", page: InventoryAnalyticsPage, init: () => window.initializeInventoryAnalytics?.() },
+  { path: "/inventory-aging", page: InventoryValuationPage, init: () => window.initializeValuation?.() },
+  { path: "/reorder-alerts", page: InventoryReportsPage, init: () => window.initializeInventoryReports?.() },
+
+  // Purchasing & Suppliers
+  { path: "/customers", page: CustomersPage, init: () => window.initializeCustomers?.() },
+  { path: "/customer-360", page: CustomersPage, init: () => window.initializeCustomers?.() },
+  { path: "/credit-limits", page: CustomersPage, init: () => window.initializeCustomers?.() },
+  { path: "/suppliers", page: SuppliersPage, init: () => window.initializeSuppliers?.() },
+  { path: "/purchases", page: PurchasesPage, init: () => window.initializePurchases?.() },
+  { path: "/goods-receipt", page: PurchasesPage, init: () => window.initializePurchases?.() },
+  { path: "/purchase-returns", page: PurchaseReturnsPage, init: () => window.initializePurchaseReturns?.() },
+
+  // HR & Payroll
+  { path: "/employees", page: EmployeesPage, init: () => window.initializeEmployees?.() },
+  { path: "/hr/employees", page: EmployeesPage, init: () => window.initializeEmployees?.() },
+  { path: "/hr/attendance", page: AttendancePage, init: () => window.initializeAttendance?.() },
+  { path: "/shifts", page: ShiftsPage, init: () => window.initializeShifts?.() },
+  { path: "/hr/shifts", page: ShiftsPage, init: () => window.initializeShifts?.() },
+  { path: "/hr/leave", page: LeavePage, init: () => window.initializeLeave?.() },
+  { path: "/payroll", page: PayrollPage, init: () => window.initializePayroll?.() },
+  { path: "/hr/payroll", page: PayrollPage, init: () => window.initializePayroll?.() },
+  { path: "/commissions", page: PayrollPage, init: () => window.initializePayroll?.() },
+
+  // Accounting
+  { path: "/accounting/accounts", page: AccountingPage, init: () => window.initializeAccounting?.() },
+  { path: "/accounting/journal", page: JournalEntriesPage, init: () => window.initializeJournalEntries?.() },
+  { path: "/accounting/ledger", page: LedgerPage, init: () => window.initializeLedger?.() },
+  { path: "/accounting/trial-balance", page: TrialBalancePage, init: () => window.initializeTrialBalance?.() },
+  { path: "/accounting/balance-sheet", page: BalanceSheetPage, init: () => window.initializeBalanceSheet?.() },
+  { path: "/accounting/expenses", page: ExpensesPage, init: () => window.initializeExpenses?.() },
+
+  // Loyalty & Payments
+  { path: "/loyalty", page: LoyaltyPage, init: () => window.initializeLoyalty?.() },
+  { path: "/loyalty/memberships", page: MembershipsPage, init: () => window.initializeMemberships?.() },
+  { path: "/gift-cards", page: GiftCardsPage, init: () => window.initializeGiftCards?.() },
+  { path: "/loyalty/gift-cards", page: GiftCardsPage, init: () => window.initializeGiftCards?.() },
+  { path: "/loyalty/coupons", page: CouponsPage, init: () => window.initializeCoupons?.() },
+  { path: "/loyalty/promotions", page: PromotionsPage, init: () => window.initializePromotions?.() },
+  { path: "/reconciliation", page: LedgerPage, init: () => window.initializeLedger?.() },
+
+  // Reports
+  { path: "/reports/sales", page: SalesReportPage, init: () => window.initializeSalesReport?.() },
+  { path: "/z-reports", page: SalesReportPage, init: () => window.initializeSalesReport?.() },
+  { path: "/reports/products", page: ProductReportPage, init: () => window.initializeProductReport?.() },
+  { path: "/reports/stock", page: StockReportPage, init: () => window.initializeStockReport?.() },
+  { path: "/reports/tax", page: TaxReportPage, init: () => window.initializeTaxReport?.() },
+  { path: "/reports/profit-loss", page: ProfitLossPage, init: () => window.initializeProfitLoss?.() },
+  { path: "/reports/cash-flow", page: CashFlowPage, init: () => window.initializeCashFlow?.() },
+  { path: "/reports/customer", page: CustomerReportPage, init: () => window.initializeCustomerReport?.() },
+  { path: "/reports/supplier", page: SupplierReportPage, init: () => window.initializeSupplierReport?.() },
+  { path: "/reports/employee", page: EmployeeReportPage, init: () => window.initializeEmployeeReport?.() },
+
+  // Fiscal
+  { path: "/fiscal-invoices", page: TaxReportPage, init: () => window.initializeTaxReport?.() },
+  { path: "/fiscal-devices", page: HardwarePage, init: () => window.initializeHardware?.() },
+
+  // System & Settings
+  { path: "/settings", page: SettingsPage, init: () => window.initializeSettings?.() },
+  { path: "/users", page: UsersPage, init: () => window.initializeUsers?.() },
+  { path: "/roles", page: RolesPage, init: () => window.initializeRoles?.() },
+  { path: "/my-permissions", page: RolesPage, init: () => window.initializeRoles?.() },
+  { path: "/taxes", page: TaxesPage, init: () => window.initializeTaxes?.() },
+  { path: "/tax-rates", page: TaxesPage, init: () => window.initializeTaxes?.() },
+  { path: "/payments", page: PaymentMethodsPage, init: () => window.initializePaymentMethods?.() },
+  { path: "/enterprise/stores", page: StoresPage, init: () => window.initializeStores?.() },
+  { path: "/branches", page: StoresPage, init: () => window.initializeStores?.() },
+  { path: "/locale", page: SettingsPage, init: () => window.initializeSettings?.() },
+  { path: "/currencies", page: SettingsPage, init: () => window.initializeSettings?.() },
+
+  // Operations & Security
+  { path: "/workflow/approvals", page: ApprovalsPage, init: () => window.initializeApprovals?.() },
+  { path: "/notifications", page: NotificationsCenterPage, init: () => window.initializeNotificationsCenter?.() },
+  { path: "/alert-rules", page: NotificationsCenterPage, init: () => window.initializeNotificationsCenter?.() },
+  { path: "/enterprise/dashboard", page: StoreDashboardPage, init: () => window.initializeStoreDashboard?.() },
+  { path: "/audit", page: SecurityPage, init: () => window.initializeSecurity?.("audit") },
+  { path: "/activity", page: SecurityPage, init: () => window.initializeSecurity?.("audit") },
+
+  // Integrations & System
+  { path: "/integrations", page: DevToolsPage, init: () => window.initializeDevTools?.() },
+  { path: "/sync-logs", page: DevToolsPage, init: () => window.initializeDevTools?.() },
+  { path: "/sync-queue", page: DevToolsPage, init: () => window.initializeDevTools?.() },
+  { path: "/backup", page: BackupPage, init: () => window.initializeBackup?.() },
+  { path: "/dev-tools", page: DevToolsPage, init: () => window.initializeDevTools?.() },
+  { path: "/hardware", page: HardwarePage, init: () => window.initializeHardware?.() },
+
+  // AI
+  { path: "/assistant", page: Dashboard, init: () => window.loadDashboard?.() },
+  { path: "/reorder-suggestions", page: InventoryAnalyticsPage, init: () => window.initializeInventoryAnalytics?.() }
+];
+
 function router() {
   const route = window.location.hash.slice(1).split("?")[0];
 
@@ -221,329 +352,17 @@ function router() {
   // ── Auth guard ───────────────────────────────────────────────────────────────
   if (!Auth.guard()) return;
 
-  // ── Dashboard ───────────────────────────────────────────────────────────────
-  if (route === "/dashboard") {
-    render(Dashboard(), () => window.loadDashboard?.());
-    return;
-  }
-
-  // ── POS ─────────────────────────────────────────────────────────────────────
-  if (route === "/pos") {
-    render(POSPage(), () => window.initializePOS?.());
-    return;
-  }
-
-  // ── Orders ──────────────────────────────────────────────────────────────────
-  if (route === "/orders") {
-    render(OrderHistoryPage(), () => window.initializeOrderHistory?.());
-    return;
-  }
-
-
-
-  // ── Cash Sessions ───────────────────────────────────────────────────────────
-  if (route === "/cash-sessions") {
-    render(CashSessionsPage(), () => window.initializeCashSessions?.());
-    return;
-  }
-
-  // ── Inventory Dashboard ─────────────────────────────────────────────────────
-  if (route === "/inventory/dashboard") {
-    render(InventoryPage(), () => window.initializeInventory?.());
-    return;
-  }
-
-  // ── Inventory Products ──────────────────────────────────────────────────────
-  if (route === "/inventory/products") {
-    render(AllProductsPage(), () => window.initializeAllProducts?.());
-    return;
-  }
-
-  // ── Stock Movements ─────────────────────────────────────────────────────────
-  if (route === "/inventory/movements") {
-    render(MovementHistoryPage(), () => window.initializeMovements?.());
-    return;
-  }
-
-  // ── Stock Adjustments ───────────────────────────────────────────────────────
-  if (route === "/inventory/adjustments") {
-    render(AdjustmentPage(), () => window.initializeAdjustments?.());
-    return;
-  }
-
-  // ── Inventory Valuation ─────────────────────────────────────────────────────
-  if (route === "/inventory/valuation") {
-    render(InventoryValuationPage(), () => window.initializeValuation?.());
-    return;
-  }
-
-  // ── Inventory Reports ───────────────────────────────────────────────────────
-  if (route === "/inventory/reports") {
-    render(InventoryReportsPage(), () => window.initializeInventoryReports?.());
-    return;
-  }
-
-  // ── Inventory Analytics ─────────────────────────────────────────────────────
-  if (route === "/inventory/analytics") {
-    render(InventoryAnalyticsPage(), () => window.initializeInventoryAnalytics?.());
-    return;
-  }
-
-  // ── All Products ─────────────────────────────────────────────────────────────
-  if (route === "/products") {
-    render(AllProductsPage(), () => window.initializeAllProducts?.());
-    return;
-  }
-
-  // ── Categories ───────────────────────────────────────────────────────────────
-  if (route === "/categories") {
-    render(CategoriesPage(), () => window.initializeCategories?.());
-    return;
-  }
-
-  // ── Brands ───────────────────────────────────────────────────────────────────
-  if (route === "/brands") {
-    render(BrandsPage(), () => window.initializeBrands?.());
-    return;
-  }
-
-  // ── Variants ─────────────────────────────────────────────────────────────────
-  if (route === "/variants") {
-    render(VariantsPage(), () => window.initializeVariants?.());
-    return;
-  }
-
-  // ── Customers ────────────────────────────────────────────────────────────────
-  if (route === "/customers") {
-    render(CustomersPage(), () => window.initializeCustomers?.());
-    return;
-  }
-
-  // ── Suppliers ────────────────────────────────────────────────────────────────
-  if (route === "/suppliers") {
-    render(SuppliersPage(), () => window.initializeSuppliers?.());
-    return;
-  }
-
-  // ── Purchase Orders ──────────────────────────────────────────────────────────
-  if (route === "/purchases") {
-    render(PurchasesPage(), () => window.initializePurchases?.());
-    return;
-  }
-
-  // ── Purchase Returns ─────────────────────────────────────────────────────────
-  if (route === "/purchase-returns") {
-    render(PurchaseReturnsPage(), () => window.initializePurchaseReturns?.());
-    return;
-  }
-
-  // ── Sales Report ─────────────────────────────────────────────────────────────
-  if (route === "/reports/sales") {
-    render(SalesReportPage(), () => window.initializeSalesReport?.());
-    return;
-  }
-
-  // ── Product Report ───────────────────────────────────────────────────────────
-  if (route === "/reports/products") {
-    render(ProductReportPage(), () => window.initializeProductReport?.());
-    return;
-  }
-
-  // ── Stock Report ─────────────────────────────────────────────────────────────
-  if (route === "/reports/stock") {
-    render(StockReportPage(), () => window.initializeStockReport?.());
-    return;
-  }
-
-  // ── Tax Report ───────────────────────────────────────────────────────────────
-  if (route === "/reports/tax") {
-    render(TaxReportPage(), () => window.initializeTaxReport?.());
-    return;
-  }
-
-  // ── Settings ─────────────────────────────────────────────────────────────────
-  if (route === "/settings") {
-    render(SettingsPage(), () => window.initializeSettings?.());
-    return;
-  }
-
-  // ── Users ────────────────────────────────────────────────────────────────────
-  if (route === "/users") {
-    render(UsersPage(), () => window.initializeUsers?.());
-    return;
-  }
-
-  // ── Roles & Permissions ──────────────────────────────────────────────────────
-  if (route === "/roles") {
-    render(RolesPage(), () => window.initializeRoles?.());
-    return;
-  }
-
-  // ── Taxes ────────────────────────────────────────────────────────────────────
-  if (route === "/taxes") {
-    render(TaxesPage(), () => window.initializeTaxes?.());
-    return;
-  }
-
-  // ── Payment Methods ──────────────────────────────────────────────────────────
-  if (route === "/payments") {
-    render(PaymentMethodsPage(), () => window.initializePaymentMethods?.());
-    return;
-  }
-
-  // ── Enterprise: Stores ───────────────────────────────────────────────────────
-  if (route === "/enterprise/stores") {
-    render(StoresPage(), () => window.initializeStores?.());
-    return;
-  }
-
-  // ── Enterprise: Warehouses ───────────────────────────────────────────────────
-  if (route === "/enterprise/warehouses") {
-    render(WarehousesPage(), () => window.initializeWarehouses?.());
-    return;
-  }
-
-  // ── Enterprise: Stock Transfers ──────────────────────────────────────────────
-  if (route === "/enterprise/transfers") {
-    render(WarehouseTransfersPage(), () => window.initializeWarehouseTransfers?.());
-    return;
-  }
-
-  // ── Enterprise: Locations & Bins ─────────────────────────────────────────────
-  if (route === "/enterprise/locations") {
-    render(LocationsZonesPage(), () => window.initializeLocationsZones?.());
-    return;
-  }
-
   // ── Security Center ───────────────────────────────────────────────────────────
-  if (route === "/security" || route === "/security/sessions" || route === "/security/audit" || route === "/security/tokens" || route === "/security/devices") {
+  if (route.startsWith("/security")) {
     const tab = route.split("/security/")[1] || "sessions";
     render(SecurityPage(), () => window.initializeSecurity?.(tab));
     return;
   }
 
-  // ── Backup & Restore ──────────────────────────────────────────────────────────
-  if (route === "/backup") {
-    render(BackupPage(), () => window.initializeBackup?.());
-    return;
-  }
-
-  // ── Developer Tools ───────────────────────────────────────────────────────────
-  if (route === "/dev-tools") {
-    render(DevToolsPage(), () => window.initializeDevTools?.());
-    return;
-  }
-
-  // ── Hardware Setup ────────────────────────────────────────────────────────────
-  if (route === "/hardware") {
-    render(HardwarePage(), () => window.initializeHardware?.());
-    return;
-  }
-
-  // ── New Reports ──────────────────────────────────────────────────────────────
-  if (route === "/reports/profit-loss") {
-    render(ProfitLossPage(), () => window.initializeProfitLoss?.());
-    return;
-  }
-  if (route === "/reports/cash-flow") {
-    render(CashFlowPage(), () => window.initializeCashFlow?.());
-    return;
-  }
-  if (route === "/reports/customer") {
-    render(CustomerReportPage(), () => window.initializeCustomerReport?.());
-    return;
-  }
-  if (route === "/reports/supplier") {
-    render(SupplierReportPage(), () => window.initializeSupplierReport?.());
-    return;
-  }
-  if (route === "/reports/employee") {
-    render(EmployeeReportPage(), () => window.initializeEmployeeReport?.());
-    return;
-  }
-
-  // ── Phase 4 Routes ─────────────────────────────────────────────────────────
-  // Accounting
-  if (route === "/accounting/accounts") {
-    render(AccountingPage(), () => window.initializeAccounting?.());
-    return;
-  }
-  if (route === "/accounting/journal") {
-    render(JournalEntriesPage(), () => window.initializeJournalEntries?.());
-    return;
-  }
-  if (route === "/accounting/ledger") {
-    render(LedgerPage(), () => window.initializeLedger?.());
-    return;
-  }
-  if (route === "/accounting/trial-balance") {
-    render(TrialBalancePage(), () => window.initializeTrialBalance?.());
-    return;
-  }
-  if (route === "/accounting/balance-sheet") {
-    render(BalanceSheetPage(), () => window.initializeBalanceSheet?.());
-    return;
-  }
-  if (route === "/accounting/expenses") {
-    render(ExpensesPage(), () => window.initializeExpenses?.());
-    return;
-  }
-
-  // HR
-  if (route === "/hr/employees") {
-    render(EmployeesPage(), () => window.initializeEmployees?.());
-    return;
-  }
-  if (route === "/hr/attendance") {
-    render(AttendancePage(), () => window.initializeAttendance?.());
-    return;
-  }
-  if (route === "/hr/leave") {
-    render(LeavePage(), () => window.initializeLeave?.());
-    return;
-  }
-  if (route === "/hr/payroll") {
-    render(PayrollPage(), () => window.initializePayroll?.());
-    return;
-  }
-  if (route === "/hr/shifts") {
-    render(ShiftsPage(), () => window.initializeShifts?.());
-    return;
-  }
-
-  // Loyalty
-  if (route === "/loyalty") {
-    render(LoyaltyPage(), () => window.initializeLoyalty?.());
-    return;
-  }
-  if (route === "/loyalty/memberships") {
-    render(MembershipsPage(), () => window.initializeMemberships?.());
-    return;
-  }
-  if (route === "/loyalty/gift-cards") {
-    render(GiftCardsPage(), () => window.initializeGiftCards?.());
-    return;
-  }
-  if (route === "/loyalty/coupons") {
-    render(CouponsPage(), () => window.initializeCoupons?.());
-    return;
-  }
-  if (route === "/loyalty/promotions") {
-    render(PromotionsPage(), () => window.initializePromotions?.());
-    return;
-  }
-
-  // Operations
-  if (route === "/workflow/approvals") {
-    render(ApprovalsPage(), () => window.initializeApprovals?.());
-    return;
-  }
-  if (route === "/notifications") {
-    render(NotificationsCenterPage(), () => window.initializeNotificationsCenter?.());
-    return;
-  }
-  if (route === "/enterprise/dashboard") {
-    render(StoreDashboardPage(), () => window.initializeStoreDashboard?.());
+  // Match standard routes
+  const matchedRoute = routeConfig.find(r => r.path === route);
+  if (matchedRoute) {
+    render(matchedRoute.page(), matchedRoute.init);
     return;
   }
 

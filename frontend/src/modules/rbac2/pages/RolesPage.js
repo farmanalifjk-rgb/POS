@@ -1,5 +1,5 @@
 import { createIcons } from "lucide";
-const API = "http://127.0.0.1:8000/api/rbac2";
+const API = "import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"/rbac2";
 const h = () => ({ "Content-Type": "application/json", Authorization: `Token ${localStorage.getItem("pos_token")}` });
 
 export function renderRolesPage(root) {

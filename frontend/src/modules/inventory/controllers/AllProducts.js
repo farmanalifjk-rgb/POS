@@ -610,7 +610,7 @@ function buildProductExportUrl(type) {
     if (filters.brand) qs.append('brand', filters.brand);
     if (filters.status) qs.append('status', filters.status);
     const qsStr = qs.toString() ? `?${qs.toString()}` : '';
-    return `http://127.0.0.1:8000/api/products-manage/export/${type}/${qsStr}`;
+    return `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/products-manage/export/${type}/${qsStr}`;
 }
 
 window.exportProductsCSV = () => window.open(buildProductExportUrl('csv'), '_blank');
@@ -711,7 +711,7 @@ window.submitImport = async function() {
         const token = localStorage.getItem("pos_token");
         const headers = token ? { Authorization: `Token ${token}` } : {};
 
-        const res = await fetch('http://127.0.0.1:8000/api/products-manage/import/', {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/products-manage/import/`, {
             method: 'POST',
             headers: headers,
             body: formData

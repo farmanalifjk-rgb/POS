@@ -1,22 +1,18 @@
-/**
- * Customers.js — CRUD controller for /api/customers/ + /api/customer-list/
- */
 import { createIcons, icons } from "lucide";
-import Auth from "../../core/controllers/Auth.js";
+import customerService from "../../../js/services/customer.service.js";
+import apiService from "../../../js/services/api.service.js";
 
-const BASE = "http://127.0.0.1:8000/api";
 let _all = [];
 
 async function api(path, method = "GET", body = null) {
-  const opts = { method, headers: { ...Auth.authHeader() } };
-  if (body) {
-    opts.headers["Content-Type"] = "application/json";
-    opts.body = JSON.stringify(body);
-  }
-  const res = await fetch(`${BASE}${path}`, opts);
-  if (res.status === 204) return null;
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  let res;
+  if (method === "GET") res = await apiService.get(path);
+  else if (method === "POST") res = await apiService.post(path, body);
+  else if (method === "PUT") res = await apiService.put(path, body);
+  else if (method === "DELETE") res = await apiService.delete(path);
+  
+  if (!res.ok) throw new Error(res.error || `HTTP ${res.status}`);
+  return res.data;
 }
 
 window.initializeCustomers = async function () {

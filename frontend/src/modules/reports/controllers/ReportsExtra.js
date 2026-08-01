@@ -1,6 +1,6 @@
 import Auth from "../../core/controllers/Auth.js";
 
-const BASE = "http://127.0.0.1:8000/api";
+const BASE = (import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api");
 async function api(path) {
   const res = await fetch(`${BASE}${path}`, { headers: Auth.authHeader() });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);

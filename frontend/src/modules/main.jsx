@@ -1,2 +1,1 @@
-import { registerServiceWorker } from "./modules/offline/registerSW";
-registerServiceWorker();
+// Entry point is src/main.js

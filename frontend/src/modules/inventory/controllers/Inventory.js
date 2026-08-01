@@ -282,7 +282,7 @@ function buildExportUrl(format) {
   if (state.tab !== "all") params.append("status", state.tab);
   
   // Aligning with standard Django structure and movement history endpoints provided[cite: 4]
-  return `http://127.0.0.1:8000/api/inventory-product/export/${format}/?${params.toString()}`; 
+  return `${import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api"}/inventory-product/export/${format}/?${params.toString()}`; 
 }
 
 

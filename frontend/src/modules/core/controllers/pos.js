@@ -1,3 +1,4 @@
+import apiService from "../../../js/services/api.service.js";
 const beepSound = new Audio("./sounds/beep.mp3");
 import { createIcons, icons } from "lucide";
 import { receiptPrinter } from "../../../js/hardware/ReceiptPrinter.js";
@@ -91,7 +92,7 @@ function renderCategories() {
 }
 
 async function loadCategories() {
-  const res = await fetch("http://127.0.0.1:8000/api/categories/");
+  const res = await fetch("/categories/");
 
   categories = await res.json();
 
@@ -105,7 +106,7 @@ function getActiveCart() {
 
 async function createOrder() {
   const response = await fetch(
-    "http://127.0.0.1:8000/api/draft-orders/create/",
+    "/draft-orders/create/",
     {
       method: "POST",
     }
@@ -169,7 +170,7 @@ function renderTabs() {
 
 // 1. Load products from API
 async function loadProducts() {
-  const res = await fetch("http://127.0.0.1:8000/api/products/");
+  const res = await fetch("/products/");
   products = await res.json();
   renderProducts();
 }
@@ -496,7 +497,7 @@ async function checkout(paymentmethod, amountReceived) {
     })),
   };
 
-  const res = await fetch("http://127.0.0.1:8000/api/checkout/", {
+  const res = await fetch("/checkout/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -563,7 +564,7 @@ async function openSession() {
   }
 
   const res = await fetch(
-    "http://127.0.0.1:8000/api/session/open/",
+    "/session/open/",
     {
       method: "POST",
       headers: {
@@ -593,7 +594,7 @@ async function openSession() {
 
 async function loadSession() {
   const res = await fetch(
-    "http://127.0.0.1:8000/api/session/active/"
+    "/session/active/"
   );
 
   const data = await res.json();
@@ -623,7 +624,7 @@ async function loadSession() {
 
 async function closeSession() {
   const res = await fetch(
-    "http://127.0.0.1:8000/api/session/close/",
+    "/session/close/",
     {
       method: "POST",
     }
@@ -651,7 +652,7 @@ async function closeSession() {
 }
 
 async function openReceipt(orderId) {
-  const res = await fetch(`http://127.0.0.1:8000/api/receipt/${orderId}/`);
+  const res = await fetch(`/receipt/${orderId}/`);
   const data = await res.json();
 
   let receiptHTML = `
@@ -690,7 +691,7 @@ async function openReceipt(orderId) {
 
 async function loadDraftOrders() {
   const res = await fetch(
-    "http://127.0.0.1:8000/api/draft-orders/"
+    "/draft-orders/"
   );
 
   const data = await res.json();
@@ -732,7 +733,7 @@ async function addToCart(productId) {
   }
 
   const res = await fetch(
-    "http://127.0.0.1:8000/api/draft-item/add/",
+    "/draft-item/add/",
     {
       method: "POST",
       headers: {
@@ -757,7 +758,7 @@ async function addToCart(productId) {
 
 async function loadDraftOrderItems(id) {
   const res = await fetch(
-    `http://127.0.0.1:8000/api/draft-orders/${id}/`
+    `/draft-orders/${id}/`
   );
 
   const data = await res.json();
@@ -829,7 +830,7 @@ function showNotification(message, type) {
 }
 
 async function increaseQty(productId) {
-  await fetch("http://127.0.0.1:8000/api/draft-item/add/", {
+  await fetch("/draft-item/add/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -844,7 +845,7 @@ async function increaseQty(productId) {
 }
 
 async function decreaseQty(productId) {
-  await fetch("http://127.0.0.1:8000/api/draft-item/decrease/", {
+  await fetch("/draft-item/decrease/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -859,7 +860,7 @@ async function decreaseQty(productId) {
 }
 
 async function removeItem(productId) {
-  await fetch("http://127.0.0.1:8000/api/draft-item/remove/", {
+  await fetch("/draft-item/remove/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -878,7 +879,7 @@ async function removeItem(productId) {
 async function processBarcode(code) {
   try {
     const res = await fetch(
-      `http://127.0.0.1:8000/api/product/barcode/${code}/`,
+      `/product/barcode/${code}/`,
     );
 
     if (!res.ok) {
@@ -901,7 +902,7 @@ async function processBarcode(code) {
 }
 
 async function loadCustomers() {
-  const res = await fetch("http://127.0.0.1:8000/api/customers/");
+  const res = await fetch("/customers/");
   const customers = await res.json();
 
   const select = document.getElementById("customer-select");
@@ -922,7 +923,7 @@ async function loadCustomers() {
 async function assignCustomer() {
   const customerId = document.getElementById("customer-select").value;
 
-  await fetch("http://127.0.0.1:8000/api/draft-order/customer/", {
+  await fetch("/draft-order/customer/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -975,7 +976,7 @@ async function createCustomer() {
 
   const phone = document.getElementById("customer-phone").value;
 
-  const res = await fetch("http://127.0.0.1:8000/api/customers/", {
+  const res = await fetch("/customers/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1008,7 +1009,7 @@ function saveNote() {
   noteTimer = setTimeout(async () => {
     const note = document.getElementById("order-note").value;
 
-    await fetch("http://127.0.0.1:8000/api/draft-order/note/", {
+    await fetch("/draft-order/note/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
